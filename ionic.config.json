@@ -1,0 +1,7 @@
+{
+  "name": "planeInfo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
