@@ -7,7 +7,7 @@ import { Tax } from './tax.model';
 import { City } from './city.model';
 import { Country } from './country.model';
 
-export interface FlightResponse {
+export interface FlightsResponse {
     pagination: {
         limit: number;
         offset: number;
@@ -17,7 +17,7 @@ export interface FlightResponse {
     data: Array<Flight>;
 }
 
-export interface AirportResponse {
+export interface AirportsResponse {
     pagination: {
         limit: number;
         offset: number;
@@ -27,7 +27,7 @@ export interface AirportResponse {
     data: Array<Airport>;
 }
 
-export interface AirlineResponse {
+export interface AirlinesResponse {
     pagination: {
         limit: number;
         offset: number;
@@ -37,7 +37,7 @@ export interface AirlineResponse {
     data: Array<Airline>;
 }
 
-export interface AirplaneResponse {
+export interface AirplanesResponse {
     pagination: {
         limit: number;
         offset: number;
