@@ -1,0 +1,36 @@
+<ion-content>
+  <div id="sky">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
+    <div id="cloud3" class="cloud"></div>
+    <div id="cloud4" class="cloud"></div>
+    <div id="cloud5" class="cloud"></div>
+    <div id="cloud6" class="cloud"></div>
+    <div id="cloud7" class="cloud"></div>
+    <div id="aeroplane"></div>
+  </div>
+  <div class="form">
+    <div class="search" [@openClose]="results ? 'opened' : 'closed'">
+      <h2 class="ion-text-center">Search Flights</h2>
+      <ion-input placeholder="Enter flight number" [(ngModel)]="flightNumber"></ion-input>
+      <div class="ion-text-center">
+        <ion-button fill="clear" (click)="searchFlight()">
+          Search
+        </ion-button>
+      </div>
+      <div *ngIf="flight">
+        <h3>Fligh Info</h3>
+        <p>Date: {{ flight.flight_date }}</p>
+        <p>Status: {{ flight.flight_status }}</p>
+        <h3>Departure</h3>
+        <p>Airport: {{ flight.departure.airport }}</p>
+        <p>Terminal: {{ flight.departure.terminal }}</p>
+        <p>Gate: {{ flight.departure.gate }}</p>
+        <h3>Arrival</h3>
+        <p>Airport: {{ flight.departure.airport }}</p>
+        <p>Terminal: {{ flight.departure.terminal }}</p>
+        <p>Gate: {{ flight.departure.gate }}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
