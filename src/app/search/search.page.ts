@@ -41,7 +41,7 @@ export class SearchPage {
 
   flight: Flight;
   flights: Array<Flight> = [];
-  flightNumber: string;
+  flightNumber = '';
 
   constructor(private avionStackService: AvionStackService) { }
 
@@ -58,6 +58,12 @@ export class SearchPage {
         }, 1100);
       });
     }
+  }
+
+  cancel() {
+    this.results = null;
+    this.flights = null;
+    this.flight = null;
   }
 
 }

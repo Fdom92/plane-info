@@ -264,4 +264,21 @@
       }
     }
   }
+
+  section.flight-info {
+    padding: 16px;
+
+    h3 {
+      color: #2c516d;
+    }
+
+    i {
+      color: #2c516d;
+    }
+  }
+
+  section.airport-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
