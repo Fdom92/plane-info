@@ -244,6 +244,14 @@
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 2px 4px 10px 0px rgba(0, 0, 0, 0.75);
+      transition: width 1s, height 1s;
+  
+      &.opened {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 1);
+      }
 
       h2 {
         color: #2c516d;
@@ -265,11 +273,33 @@
     }
   }
 
+  section.flights-list {
+    ion-list {
+      padding: 0;
+    }
+  }
+
   section.flight-info {
-    padding: 16px;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    transition: height 1s, opacity 1s, padding 1s;
+
+    &.opened {
+      padding: 16px;
+      height: 250px;
+      opacity: 1;
+      transition: height 1s, opacity 1s, padding 1s;
+    }
 
     h3 {
+      font-size: 18px;
       color: #2c516d;
+      text-decoration: underline;
+    }
+
+    p {
+      font-size: 14px;
     }
 
     i {
@@ -280,5 +310,9 @@
   section.airport-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    .departure-info {
+      justify-self: center;
+    }
   }
 }

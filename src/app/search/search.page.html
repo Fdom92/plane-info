@@ -10,48 +10,55 @@
     <div id="aeroplane"></div>
   </section>
   <section class="form">
-    <section class="search" [@openClose]="results ? 'opened' : 'closed'">
+    <section class="search" [ngClass]="{'opened': results}">
       <h2 class="ion-text-center">Search Flights</h2>
       <ion-input placeholder="Enter flight number" [(ngModel)]="flightNumber"></ion-input>
       <div class="ion-text-center">
-        <ion-button *ngIf="flightNumber.length > 0 || !flight" fill="clear" (click)="searchFlight()">
+        <ion-button *ngIf="flightNumber.length > 0 || !flightSearched" fill="clear" (click)="searchFlight()">
           Search
         </ion-button>
-        <ion-button *ngIf="flightNumber.length === 0 && flight" fill="clear" (click)="cancel()">
+        <ion-button *ngIf="flightNumber.length === 0 && flightSearched" fill="clear" (click)="cancel()">
           Cancel
         </ion-button>
       </div>
-      <section class="flight-info" *ngIf="flight">
-        <div class="general-info">
-          <h3 class="ion-text-center">Fligh Info</h3>
-          <p><i class="fas fa-calendar-day"></i> {{ flight.flight_date | date:'fullDate' }}</p>
-          <p class="ion-text-capitalize">
-            <i class="fas fa-calendar-check" *ngIf="flight.flight_status === 'scheduled'"></i>
-            <i class="fas fa-plane" *ngIf="flight.flight_status === 'active'"></i>
-            <i class="fas fa-plane-arrival" *ngIf="flight.flight_status === 'landed'"></i>
-            <i class="fas fa-calendar-times" *ngIf="flight.flight_status === 'cancelled'"></i>
-            <i class="fas fa-exclamation-circle" *ngIf="flight.flight_status === 'incident'"></i>
-            <i class="fas fa-code-branch" *ngIf="flight.flight_status === 'diverted'"></i>
-            {{ flight.flight_status }}</p>
-        </div>
-        <section class="airport-info">
-          <div class="departure-info">
-            <h3 class="ion-text-center">Departure</h3>
-            <p>Airport: {{ flight.departure.airport }}</p>
-            <p>Terminal: {{ flight.departure.terminal }}</p>
-            <p>Gate: {{ flight.departure.gate ? flight.departure.gate : 'No gate info'}}</p>
-            <p>Scheduled: {{ flight.departure.scheduled | date:'shortTime' }}</p>
-            <p *ngIf="flight.departure.actual">Actual: {{ flight.departure.actual | date:'shortTime' }}</p>
-          </div>
-          <div class="arrival-info">
-            <h3 class="ion-text-center">Arrival</h3>
-            <p>Airport: {{ flight.arrival.airport }}</p>
-            <p>Terminal: {{ flight.arrival.terminal }}</p>
-            <p>Gate: {{ flight.arrival.gate ? flight.arrival.gate : 'No gate info'}}</p>
-            <p>Scheduled: {{ flight.arrival.scheduled | date:'shortTime' }}</p>
-            <p *ngIf="flight.arrival.actual">Actual: {{ flight.arrival.actual | date:'shortTime' }}</p>
-          </div>
-        </section>
+      <section *ngIf="flights" class="flights-list">
+        <ion-list>
+          <ng-container *ngFor="let flight of flights">
+            <ion-item lines="none" (click)="openFlight(flight)">
+              <ion-label>
+                <p><i class="fas fa-calendar-day"></i> {{ flight.flight_date | date:'d MMM, y' }}</p>
+                <p class="ion-text-capitalize">
+                  <i class="fas fa-calendar-check" *ngIf="flight.flight_status === 'scheduled'"></i>
+                  <i class="fas fa-plane" *ngIf="flight.flight_status === 'active'"></i>
+                  <i class="fas fa-plane-arrival" *ngIf="flight.flight_status === 'landed'"></i>
+                  <i class="fas fa-calendar-times" *ngIf="flight.flight_status === 'cancelled'"></i>
+                  <i class="fas fa-exclamation-circle" *ngIf="flight.flight_status === 'incident'"></i>
+                  <i class="fas fa-code-branch" *ngIf="flight.flight_status === 'diverted'"></i>
+                  {{ flight.flight_status }}</p>
+              </ion-label>
+            </ion-item>
+            <section class="flight-info" [ngClass]="{'opened': flight === flightSelected}">
+              <section class="airport-info">
+                <div class="departure-info">
+                  <h3>Departure</h3>
+                  <p>Airport: {{ flight.departure.airport }}</p>
+                  <p>Terminal: {{ flight.departure.terminal }}</p>
+                  <p>Gate: {{ flight.departure.gate ? flight.departure.gate : 'No gate info'}}</p>
+                  <p>Scheduled: {{ flight.departure.scheduled | date:'shortTime' }}</p>
+                  <p *ngIf="flight.departure.actual">Actual: {{ flight.departure.actual | date:'shortTime' }}</p>
+                </div>
+                <div class="arrival-info">
+                  <h3>Arrival</h3>
+                  <p>Airport: {{ flight.arrival.airport }}</p>
+                  <p>Terminal: {{ flight.arrival.terminal }}</p>
+                  <p>Gate: {{ flight.arrival.gate ? flight.arrival.gate : 'No gate info'}}</p>
+                  <p>Scheduled: {{ flight.arrival.scheduled | date:'shortTime' }}</p>
+                  <p *ngIf="flight.arrival.actual">Actual: {{ flight.arrival.actual | date:'shortTime' }}</p>
+                </div>
+              </section>
+            </section>
+          </ng-container>
+        </ion-list>
       </section>
     </section>
   </section>
