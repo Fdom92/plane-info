@@ -1,1 +1,8 @@
+#Node Modules
 node_modules/
+
+#Firebase files
+.firebase
+
+#Build files
+www/
